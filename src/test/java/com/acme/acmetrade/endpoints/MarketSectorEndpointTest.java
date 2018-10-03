@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.acme.acmetrade.TradeApplication;
+import com.acme.acmetrade.domain.ResponseStatus;
 import com.acme.acmetrade.domain.Sector;
 
 import io.restassured.RestAssured;
@@ -70,6 +71,10 @@ public class MarketSectorEndpointTest {
 				.when().post("/sectors")
 				.then().statusCode(HttpStatus.SC_CREATED)
 				.and().extract().response();
+		
+		ResponseStatus status = response.as(ResponseStatus.class);
+		
+		assertThat(status.getStatusCode(), equalTo("0"));
 				
 		
 	}
