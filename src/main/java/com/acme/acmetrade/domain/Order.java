@@ -59,6 +59,9 @@ public class Order {
 	public void setLastUpdate(String lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
+	
+	public Order() {};
+	
 	public Order(int traderId, int orderId, String symbol, String side, String orderType, float price, int shares,
 			String lastUpdate) {
 		super();

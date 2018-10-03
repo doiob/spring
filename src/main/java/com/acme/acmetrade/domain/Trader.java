@@ -52,6 +52,8 @@ public class Trader {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+	public Trader() {};
+
 	public Trader(int traderId, String firstName, String lastName, int phoneNum, String email, String address,
 			String companyName) {
 		super();
