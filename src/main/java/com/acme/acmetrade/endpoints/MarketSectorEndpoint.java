@@ -37,7 +37,7 @@ public class MarketSectorEndpoint {
 	}
 
 	@RequestMapping(path = "/sectors/{id}", method = RequestMethod.GET)
-	public Sector listSector(@PathParam("id") int id) {
+	public Sector listSector(@PathParam("id") Integer id) {
 		return new Sector();
 	}
 
