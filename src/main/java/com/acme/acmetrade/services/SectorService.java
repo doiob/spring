@@ -26,7 +26,7 @@ public class SectorService {
     	marketSectorRepository.getAllMarketSectors();
     }  
     
-    public void deleteMarketSector(String name) {
-    	marketSectorRepository.deleteMarketSector(name);
+    public void deleteMarketSector(Sector sector) {
+    	marketSectorRepository.deleteMarketSector(sector);
     }  
 }

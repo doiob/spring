@@ -22,8 +22,9 @@ public class MarketSectorRepository {
 				sector.getSectorName(), sector.getSectorDesc());
 	}
 
-	public void updateMarketSector (Sector sector) {
-		throw new UnsupportedOperationException();
+	public int updateMarketSector (Sector sector) {
+		return jdbcTemplate.update("UPDATE MARKET_SECTOR SET SECTOR_NAME = ?, SECTOR_DESC = ? WHERE SECTOR_ID = ?", 
+				sector.getSectorName(), sector.getSectorDesc(), sector.getId());
 	}
 	
 	public Sector getMarketSectorByName(String name) {
@@ -34,8 +35,8 @@ public class MarketSectorRepository {
 		return jdbcTemplate.query("SELECT * from MARKET_SECTOR", new MarketSectorRowMapper());
 	}
 	
-	public void deleteMarketSector (String name) {
-		throw new UnsupportedOperationException();
+	public int deleteMarketSector (Sector sector) {
+		return jdbcTemplate.update("DELETE MARKET_SECTOR WHERE SECTOR_ID = ?", sector.getId());
 	}
 	
 	public void getSectorId(String sectorName){
