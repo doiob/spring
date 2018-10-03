@@ -14,8 +14,9 @@ import java.util.List;
 @RequestMapping("/trading")
 public class SecurityEndpoint {
 
-	//@Autowired
-	private SecurityService securityService = new SecurityService();
+	//
+	@Autowired
+	private SecurityService securityService ;
 
 	@RequestMapping(path = "/securities" , method = RequestMethod.GET)
 	public List<Security> listSecurities() {
@@ -23,18 +24,20 @@ public class SecurityEndpoint {
 	}
 
 	@RequestMapping(path = "/securities/{symbol}" , method = RequestMethod.GET)
-	public Security listSecurity(@PathParam("symbol") String symbol) {
-		return new Security();
+	public Security listSecurity(@PathVariable("symbol") String symbol) {
+		Security security = securityService.getSecurityBySymbol(symbol);
+		return security;
 	}
 
 	@RequestMapping(path = "/securities" , method = RequestMethod.POST)
 	public Security addSecurity(@RequestBody Security security) {
+		securityService.addSecurity(security);
 		return security;
 	}
 
 	@RequestMapping(path = "/securities" , method = RequestMethod.PUT)
 	public Security updateSecurity(@RequestBody Security security) {
-		securityService.addSecurity(security);
+		// securityService.addSecurity(security);
 		return security;
 	}
 
