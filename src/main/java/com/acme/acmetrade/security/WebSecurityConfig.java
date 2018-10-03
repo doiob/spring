@@ -2,6 +2,7 @@ package com.acme.acmetrade.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,8 +17,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-            .authorizeRequests()
-                .anyRequest().permitAll()
+            .authorizeRequests()               
+                .antMatchers(HttpMethod.GET, "/securities/**").permitAll()   
+                .antMatchers(HttpMethod.GET, "/sectors/**").permitAll() 
+     	        .anyRequest().authenticated()
                 .and()
             .httpBasic()
                 .and()
@@ -28,9 +31,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .inMemoryAuthentication()
-                .withUser("john").password("smith").roles("USER")
+            .inMemoryAuthentication()               
+                .withUser("bill").password("bill").roles("USER")
+                .and()
+                .withUser("ram").password("ram").roles("USER")
+                .and()
+                .withUser("justin").password("justin").roles("USER")
+                .and()
+                .withUser("lalit").password("lalit").roles("USER")
+                .and()
+                .withUser("florence").password("florence").roles("USER")
                 .and()
                 .withUser("admin").password("admin").roles("USER", "ADMIN");
     }
 }
+
+   
