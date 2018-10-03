@@ -30,4 +30,9 @@ public class SecurityEndpoint {
 	public Security addSecurity(@RequestBody Security security) {
 		return security;
 	}
+
+	@RequestMapping(path = "/securities/{symbol}" , method = RequestMethod.DELETE)
+	public void delteSecurity(@PathParam("symbol") String symbol) {
+
+	}
 }
