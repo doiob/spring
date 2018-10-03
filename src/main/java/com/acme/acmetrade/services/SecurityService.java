@@ -10,7 +10,6 @@ public class SecurityService {
     private SecurityRepository securityRepository;
 
     public void addSecurity(Security security){
-
         securityRepository.saveSecurity(security);
     }
 

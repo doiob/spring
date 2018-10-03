@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/trading")
 public class SecurityEndpoint {
 
-
+	//@Autowired
+	private SecurityService securityService = new SecurityService();
 
 	@RequestMapping(path = "/securities" , method = RequestMethod.GET)
 	public List<Security> listSecurities() {
@@ -27,6 +29,12 @@ public class SecurityEndpoint {
 
 	@RequestMapping(path = "/securities" , method = RequestMethod.POST)
 	public Security addSecurity(@RequestBody Security security) {
+		return security;
+	}
+
+	@RequestMapping(path = "/securities" , method = RequestMethod.PUT)
+	public Security updateSecurity(@RequestBody Security security) {
+		securityService.addSecurity(security);
 		return security;
 	}
 
