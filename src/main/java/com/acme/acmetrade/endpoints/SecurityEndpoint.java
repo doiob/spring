@@ -46,8 +46,8 @@ public class SecurityEndpoint {
 		securityService.deleteSecurityBySymbol(symbol);
 	}
 
-	@RequestMapping(path = "/securities/{sectorId}" , method = RequestMethod.DELETE)
-	public void deleteSecurityBySectorId(@PathVariable("sectorId") String sectorId) {
-		securityService.deleteSecurityBySectorId(sectorId);
-	}
+//	@RequestMapping(path = "/securities/{sectorId}" , method = RequestMethod.DELETE)
+//	public void deleteSecurityBySectorId(@PathVariable("sectorId") String sectorId) {
+//		securityService.deleteSecurityBySectorId(sectorId);
+//	}
 }
