@@ -27,8 +27,7 @@ public class Sector {
 	
 	public Sector() {};
 	
-	public Sector(int id, String sectorName, String sectorDesc) {
-		this.id = id;
+	public Sector(String sectorName, String sectorDesc) {
 		this.sectorName = sectorName;
 		this.sectorDesc = sectorDesc;
 	}

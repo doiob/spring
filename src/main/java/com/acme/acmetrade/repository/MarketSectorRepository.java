@@ -39,16 +39,15 @@ public class MarketSectorRepository {
 		return jdbcTemplate.update("DELETE MARKET_SECTOR WHERE SECTOR_ID = ?", sector.getId());
 	}
 	
-	public void getSectorId(String sectorName){
-        jdbcTemplate.query("SELECT SECTOR_ID FROM MARKET_SECTOR WHERE SECTOR_NAME = ?",(new RowMapper<String>() {
+	public int getSectorId(String sectorName){
+       return (Integer)jdbcTemplate.queryForObject("SELECT SECTOR_ID FROM MARKET_SECTOR WHERE SECTOR_NAME = ?",
+    		   new Object[] {sectorName},(new RowMapper<Integer>() {
 
             @Override
-            public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-                String sectorId;
-                sectorId = rs.getString("SECTOR_ID");
-                return sectorId;
+            public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getInt("SECTOR_ID");
             }
-        }),sectorName);
+        }));
     }
 	
 	class MarketSectorRowMapper implements RowMapper<Sector> {
