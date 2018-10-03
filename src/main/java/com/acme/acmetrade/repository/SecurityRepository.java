@@ -27,29 +27,38 @@ public class SecurityRepository {
 
 	public int saveSecurity(Security security) {
 		return jdbcTemplate.update(
-				"INSERT INTO SECURITIES(SYMBOL, COMPANY_NAME, COMPANY_DESC) VALUES(?,?,?,?)",
-				security.getSymbol(), security.getCompanyName(), security.getDescription());
-	}
-
-	public int updateSecurity(Security security) {
-		return jdbcTemplate.update("UPDATE SECURITIES SET SYMBOL = ?, COMPANY_NAME = ?, COMPANY_DESC = ? WHERE SECTOR_ID = ?",
+				"INSERT INTO SECURITIES(SYMBOL, COMPANY_NAME, COMPANY_DESC, SECTOR_ID) VALUES(?,?,?,?)",
 				security.getSymbol(), security.getCompanyName(), security.getDescription(), security.getSectorId());
 	}
 
-	public int deleteSecurity(Security security) {
-		return jdbcTemplate.update("DELETE SECURITIES WHERE SECTOR_ID = ?",
-				security.getSectorId());
+	public int updateSecurity(Security security) {
+		return jdbcTemplate.update("UPDATE SECURITIES SET SECTOR_ID = ?, COMPANY_NAME = ?, COMPANY_DESC = ? WHERE SYMBOL = ?",
+				security.getSectorId(), security.getCompanyName(), security.getDescription(), security.getSymbol());
 	}
 
-	public List<Security> getAllSecurities() {
+	public int deleteSecurityBySymbol(String symbol) {
+		return jdbcTemplate.update("DELETE SECURITIES WHERE SYMBOL = ?",
+				symbol);
+	}
+
+	public int deleteSecurityBySectorId(String sectorId) {
+		return jdbcTemplate.update("DELETE SECURITIES WHERE SECTOR_ID = ?",
+				sectorId);
+	}
+
+	public List<Security> retrieveAllSecurities() {
 		return jdbcTemplate.query("SELECT * from SECURITIES", new SecurityRowMapper());
+	}
+
+	public List<Security> retrieveSecurityBySectorId(String sectorId) {
+		return jdbcTemplate.query("SELECT * from SECURITIES where SECTOR_ID = ?",new SecurityRowMapper(), new Object[] {sectorId});
 	}
 
 	public Security retrieveSecurityBySymbol(String symbol) {
 		return (Security)jdbcTemplate.queryForObject("SELECT * from SECURITIES where SYMBOL = ?",new SecurityRowMapper(), new Object[] {symbol});
 	}
 
-	public List<Security> getSecuritiesBySectorId(Sector sector) {
+	public List<Security> retrieveSecuritiesBySectorId(Sector sector) {
 		return jdbcTemplate.query(new PreparedStatementCreator() {
 
 			@Override

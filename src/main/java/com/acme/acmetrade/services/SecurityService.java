@@ -48,19 +48,29 @@ public class SecurityService {
 		}
         return 0;
     }
-    public int deleteSecurity(Security security){
+    public int deleteSecurityBySymbol(String symbol){
         try {
-			return securityRepository.deleteSecurity(security);
+			return securityRepository.deleteSecurityBySymbol(symbol);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return 0;
     }
+
+    public int deleteSecurityBySectorId(String sectorId){
+        try {
+            return securityRepository.deleteSecurityBySectorId(sectorId);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return 0;
+    }
     public List<Security> getAllSecurities() 
     {
     	try {
-			return securityRepository.getAllSecurities();
+			return securityRepository.retrieveAllSecurities();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,7 +88,7 @@ public class SecurityService {
     }
     public List<Security> getSecuritiesBySectorId(Sector sector) {
     	try {
-			return securityRepository.getSecuritiesBySectorId(sector);
+			return securityRepository.retrieveSecuritiesBySectorId(sector);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

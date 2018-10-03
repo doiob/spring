@@ -20,7 +20,7 @@ public class SecurityEndpoint {
 
 	@RequestMapping(path = "/securities" , method = RequestMethod.GET)
 	public List<Security> listSecurities() {
-		return new ArrayList<Security>();
+		return  securityService.getAllSecurities();
 	}
 
 	@RequestMapping(path = "/securities/{symbol}" , method = RequestMethod.GET)
@@ -31,18 +31,23 @@ public class SecurityEndpoint {
 
 	@RequestMapping(path = "/securities" , method = RequestMethod.POST)
 	public Security addSecurity(@RequestBody Security security) {
-		securityService.addSecurity(security);
+		securityService.updateSecurity(security);
 		return security;
 	}
 
 	@RequestMapping(path = "/securities" , method = RequestMethod.PUT)
 	public Security updateSecurity(@RequestBody Security security) {
-		// securityService.addSecurity(security);
+		securityService.updateSecurity(security);
 		return security;
 	}
 
 	@RequestMapping(path = "/securities/{symbol}" , method = RequestMethod.DELETE)
-	public void deleteSecurity(@PathParam("symbol") String symbol) {
+	public void deleteSecurityBySymbol(@PathVariable("symbol") String symbol) {
+		securityService.deleteSecurityBySymbol(symbol);
+	}
 
+	@RequestMapping(path = "/securities/{sectorId}" , method = RequestMethod.DELETE)
+	public void deleteSecurityBySectorId(@PathVariable("sectorId") String sectorId) {
+		securityService.deleteSecurityBySectorId(sectorId);
 	}
 }
