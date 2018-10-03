@@ -24,6 +24,9 @@ public class Sector {
 	public void setSectorDesc(String sectorDesc) {
 		this.sectorDesc = sectorDesc;
 	}
+	
+	public Sector() {};
+	
 	public Sector(int id, String sectorName, String sectorDesc) {
 		this.id = id;
 		this.sectorName = sectorName;
