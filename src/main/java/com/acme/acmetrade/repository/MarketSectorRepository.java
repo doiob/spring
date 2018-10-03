@@ -28,7 +28,7 @@ public class MarketSectorRepository {
 	}
 	
 	public Sector getMarketSectorByName(String name) {
-		return jdbcTemplate.queryForObject("SELECT * from MARKET_SECTOR WHERE SECTOR_NAME = ?", new MarketSectorRowMapper());
+		return jdbcTemplate.queryForObject("SELECT * from MARKET_SECTOR WHERE SECTOR_NAME = ?", new Object[] {name},  new MarketSectorRowMapper());
 	}
 	
 	public List<Sector> getAllMarketSectors() {
