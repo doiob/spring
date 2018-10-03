@@ -27,8 +27,8 @@ public class SecurityRepository {
 
 	public int saveSecurity(Security security) {
 		return jdbcTemplate.update(
-				"INSERT INTO SECURITIES(SYMBOL, COMPANY_NAME, COMPANY_DESC, SECTOR_ID) VALUES(?,?,?,?)",
-				security.getSymbol(), security.getCompanyName(), security.getDescription(), security.getSectorId());
+				"INSERT INTO SECURITIES(SYMBOL, COMPANY_NAME, COMPANY_DESC) VALUES(?,?,?,?)",
+				security.getSymbol(), security.getCompanyName(), security.getDescription());
 	}
 
 	public int updateSecurity(Security security) {
