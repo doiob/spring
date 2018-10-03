@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.acme.acmetrade.domain.Sectors;
+import com.acme.acmetrade.domain.Sector;
 
 @RestController
-public class SectorsEndpoint {	
+public class MarketSectorEndpoint {	
 		
 	@RequestMapping(value="/sectors", method = RequestMethod.GET)	
-	public List<Sectors> getSectors(){
-		return new ArrayList<Sectors>();
+	public List<Sector> getSectors(){
+		return new ArrayList<Sector>();
 	}
 
 	@RequestMapping(path = "/sectors" , method = RequestMethod.POST)
-	public Sectors addSector(@RequestBody Sectors sector) {		
-		return new Sectors(0, "test", "test");
+	public Sector addSector(@RequestBody Sector sector) {		
+		return new Sector(0, "test", "test");
 	}
 }

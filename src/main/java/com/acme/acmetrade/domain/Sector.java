@@ -1,6 +1,6 @@
 package com.acme.acmetrade.domain;
 
-public class Sectors {
+public class Sector {
 	
 	private int id;
 	private String sectorName;
@@ -24,7 +24,7 @@ public class Sectors {
 	public void setSectorDesc(String sectorDesc) {
 		this.sectorDesc = sectorDesc;
 	}
-	public Sectors(int id, String sectorName, String sectorDesc) {
+	public Sector(int id, String sectorName, String sectorDesc) {
 		this.id = id;
 		this.sectorName = sectorName;
 		this.sectorDesc = sectorDesc;
