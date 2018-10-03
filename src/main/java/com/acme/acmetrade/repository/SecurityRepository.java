@@ -22,10 +22,10 @@ public class SecurityRepository {
     public SecurityRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
+   
     public int saveSecurity(Security security){
-        return jdbcTemplate.update("INSERT INTO SECURITIES(CURRENCY, AMOUNT, SIDE) VALUES(?,?,?,?)",
-                security.getSymbol(), security.getCompanyName(), security.getSectorId(), security.getDescription());
+        return jdbcTemplate.update("INSERT INTO SECURITIES(SYMBOL, COMPANY_NAME, COMPANY_DESC, SECTOR_ID) VALUES(?,?,?,?)",
+                security.getSymbol(), security.getCompanyName(), security.getDescription(), security.getSectorId());
     }
     
     public void updateSecurity(Security security) {
