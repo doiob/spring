@@ -1,32 +1,38 @@
 package com.acme.acmetrade.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.acme.acmetrade.domain.Sector;
 import com.acme.acmetrade.repository.MarketSectorRepository;
 
+@Service
 public class SectorService {
 
     @Autowired
     private MarketSectorRepository marketSectorRepository;
 
-    public void addMarketSector(Sector sector){
-    	marketSectorRepository.addMarketSector(sector);
+    public int addMarketSector(Sector sector){
+    	return marketSectorRepository.addMarketSector(sector);
     }
     
-    public void updateMarketSector(Sector sector) {
-    	marketSectorRepository.updateMarketSector(sector);
+    public int updateMarketSector(Sector sector) {
+    	return marketSectorRepository.updateMarketSector(sector);
     }
     
-    public void getMarketSectorByName(String name) {
-    	marketSectorRepository.getMarketSectorByName(name);
+    public Sector getMarketSectorByName(String name) {
+    	return marketSectorRepository.getMarketSectorByName(name);
     }
     
-    public void getAllMarketSectors() {
-    	marketSectorRepository.getAllMarketSectors();
+    public List<Sector> getAllMarketSectors() {
+    	return marketSectorRepository.getAllMarketSectors();
     }  
     
-    public void deleteMarketSector(Sector sector) {
-    	marketSectorRepository.deleteMarketSector(sector);
-    }  
+    public int deleteMarketSector(Sector sector) {
+    	return marketSectorRepository.deleteMarketSector(sector);
+    } 
+    
+    
 }

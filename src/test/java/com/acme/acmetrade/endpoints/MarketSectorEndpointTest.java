@@ -5,6 +5,8 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 import org.apache.http.HttpStatus;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.acme.acmetrade.TradeApplication;
@@ -34,7 +37,6 @@ public class MarketSectorEndpointTest {
 	}
 
 	@Test
-	@Sql(scripts= {"classpath:/schema.sql", "classpath:/data.sql"})
 	public void allSectorsReturned() {
 		Response response =  given().accept(MediaType.APPLICATION_JSON_VALUE)
 		.when().get("/sectors")
@@ -43,6 +45,33 @@ public class MarketSectorEndpointTest {
 		
 		Sector[] jsonResponse = response.as(Sector[].class); 
 		assertThat(jsonResponse.length, equalTo(2));
+	}
+	
+	@Test
+	public void getSectorById() {
+		Response response = given().accept(MediaType.APPLICATION_JSON_VALUE)
+				.when().get("/sectors/1")
+				.then().statusCode(HttpStatus.SC_OK)
+				.and().extract().response();
+			
+		Sector jsonResponse = response.as(Sector.class);
+		assertThat(jsonResponse.getSectorName(), equalTo("Financial"));		
+	}
+	
+	@Test
+	public void addSector() throws JSONException {
+		JSONObject json = new JSONObject();
+		
+		json.put("sectorName", "Test");
+		json.put("sectorDesc", "Test sector");
+		
+		Response response = given().accept(MediaType.APPLICATION_JSON_VALUE)
+				.body(json.toString())
+				.when().post("/sectors")
+				.then().statusCode(HttpStatus.SC_CREATED)
+				.and().extract().response();
+				
+		
 	}
 
 }
