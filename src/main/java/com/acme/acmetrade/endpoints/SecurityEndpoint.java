@@ -13,8 +13,7 @@ import java.util.List;
 @RestController
 public class SecurityEndpoint {
 
-	@Autowired
-	private SecurityService securityService;
+
 
 	@RequestMapping(path = "/securities" , method = RequestMethod.GET)
 	public List<Security> listSecurities() {
