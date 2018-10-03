@@ -22,7 +22,7 @@ public class SecurityEndpoint {
 	}
 
 	@RequestMapping(path = "/securities/{symbol}" , method = RequestMethod.GET)
-	public Security listSecuritY(@PathParam("symbol") String symbol) {
+	public Security listSecurity(@PathParam("symbol") String symbol) {
 		return new Security();
 	}
 
@@ -32,7 +32,7 @@ public class SecurityEndpoint {
 	}
 
 	@RequestMapping(path = "/securities/{symbol}" , method = RequestMethod.DELETE)
-	public void delteSecurity(@PathParam("symbol") String symbol) {
+	public void deleteSecurity(@PathParam("symbol") String symbol) {
 
 	}
 }
