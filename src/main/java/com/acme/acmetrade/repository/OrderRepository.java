@@ -3,6 +3,8 @@ package com.acme.acmetrade.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,7 +21,11 @@ public class OrderRepository {
 	public OrderRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-
+	
+	public List<Order> getAllOrders() {
+		return jdbcTemplate.query("SELECT * from ORDERS", new OrderRowMapper());
+	}	
+	
 	public int saveOrder(Order order) {
 		return jdbcTemplate.update(
 				"INSERT INTO ORDERS(TRADER_ID, ORDER_ID, SYMBOL, SIDE, ORDER_TYPE, PRICE, SHARES, LAST_UPDATE) VALUES(?,?,?,?,?,?,?,?)",
@@ -27,7 +33,7 @@ public class OrderRepository {
 	}
 		
 	
-	class SecurityRowMapper implements RowMapper<Order> {
+	class OrderRowMapper implements RowMapper<Order> {
 
 		@Override
 		public Order mapRow(ResultSet rs, int rowNum) throws SQLException {

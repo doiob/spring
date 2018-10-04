@@ -5,6 +5,7 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,12 @@ public class MarketSectorEndpoint {
 	}
 
 	@RequestMapping(path = "/sectors/{id}", method = RequestMethod.GET)
-	public Sector listSector(@PathVariable("id") int id) {
-		return service.getMarketSectorById(id);
+	public Sector getMarketSectorByNameOrId(@PathVariable String id) {
+		if (NumberUtils.isCreatable(id)) {
+			return service.getMarketSectorById(NumberUtils.toInt(id));
+		} else {
+			return service.getMarketSectorByName(id);
+		}
 	}
 
 	@RequestMapping(path = "/sectors/{id}", method = RequestMethod.DELETE)
@@ -58,6 +63,7 @@ public class MarketSectorEndpoint {
 		}
 	}
 
+	@RequestMapping(path = "/sectors", method = RequestMethod.PATCH)
 	public ResponseStatus updateMarketSector(Sector sector) {
 		int numRows = service.updateMarketSector(sector);
 
@@ -67,9 +73,4 @@ public class MarketSectorEndpoint {
 			return new ResponseStatus(1111, "Unable to updated sector");
 		}
 	}
-
-	public Sector getMarketSectorByName(String name) {
-		return service.getMarketSectorByName(name);
-	}
-
 }
