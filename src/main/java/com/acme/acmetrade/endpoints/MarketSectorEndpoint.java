@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.websocket.server.PathParam;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +44,7 @@ public class MarketSectorEndpoint {
 
 	@RequestMapping(path = "/sectors/{id}", method = RequestMethod.DELETE)
 	public ResponseStatus deleteSector(@PathParam("id") int id) {
-		int numRows = service.deleteMarketSector(new Sector(id, null, null));
+		int numRows = service.deleteMarketSector(new Sector(id, StringUtils.EMPTY, StringUtils.EMPTY));
 
 		if (numRows != 1) {
 			return new ResponseStatus(0, "Successfully deleted sector");

@@ -31,4 +31,10 @@ public class Sector {
 		this.sectorName = sectorName;
 		this.sectorDesc = sectorDesc;
 	}
+	
+	public Sector(int id, String sectorName, String sectorDesc) {
+		this.id = id;
+		this.sectorName = sectorName;
+		this.sectorDesc = sectorDesc;
+	}
 }
