@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.acme.acmetrade.TradeApplication;
 import com.acme.acmetrade.domain.Sector;
 
-@Sql(scripts= {"classpath:/testData.sql"})
+@Sql(scripts= {"classpath:/testableSector.sql"})
 @RunWith(SpringRunner.class) 
 @SpringBootTest(classes = {TradeApplication.class})
 
