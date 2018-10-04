@@ -3,17 +3,20 @@ package com.acme.acmetrade.endpoints;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acme.acmetrade.domain.Order;
+import com.acme.acmetrade.services.OrderService;
 
 @RestController
 public class OrderEndPoint {
+	
+	@Autowired
+	private OrderService orderService ;
 	
 	@RequestMapping(value="/orders", method = RequestMethod.GET)	
 	public List<Order> getOrders(){
@@ -21,17 +24,9 @@ public class OrderEndPoint {
 	}
 
 	@RequestMapping(path = "/orders" , method = RequestMethod.POST)
-	public Order addOrder(@RequestBody Order order) {		
+	public Order addOrder(@RequestBody Order order) {	
+		orderService.saveOrder(order);
 		return order;
-	}
-	
-	@RequestMapping(path = "/orders/{id}" , method = RequestMethod.GET)
-	public Order listOrders(@PathParam("id") int id) {
-		return new Order();
-	}
-	
-	@RequestMapping(path = "/orders/{id}" , method = RequestMethod.DELETE)
-	public void deleteOrder(@PathParam("id") int id) {
 	}
 
 }
