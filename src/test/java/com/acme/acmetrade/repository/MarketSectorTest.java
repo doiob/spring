@@ -54,7 +54,6 @@ public class MarketSectorTest {
 	public void updateSector() {
 		Sector sector = marketSectorRepository.getMarketSectorByName("Health");
 		sector.setSectorName("NewSectorName");
-		sector.setSectorDesc("This is a new description");
 		marketSectorRepository.updateMarketSector(sector);
 		Sector updatedSector = marketSectorRepository.getMarketSectorByName("NewSectorName");
 		assertThat(updatedSector.getSectorName(), equalTo("NewSectorName"));
