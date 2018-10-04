@@ -49,9 +49,11 @@ public class MarketSectorEndpointTest {
 	}
 	
 	@Test
-	public void getSectorById() {
+	public void getSectorById() throws JSONException {
+
 		Response response = given().accept(MediaType.APPLICATION_JSON_VALUE)
-				.when().get("/sectors/1")
+				.pathParam("sectorId", 1)
+				.when().get("/sectors/{sectorId}")
 				.then().statusCode(HttpStatus.SC_OK)
 				.and().extract().response();
 			
