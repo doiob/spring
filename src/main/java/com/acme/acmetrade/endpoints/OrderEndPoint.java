@@ -1,6 +1,5 @@
 package com.acme.acmetrade.endpoints;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +19,12 @@ public class OrderEndPoint {
 	
 	@RequestMapping(value="/orders", method = RequestMethod.GET)	
 	public List<Order> getOrders(){
-		return new ArrayList<Order>();
-	}
-
+		return orderService.getAllOrders();
+	}	
+	
 	@RequestMapping(path = "/orders" , method = RequestMethod.POST)
 	public Order addOrder(@RequestBody Order order) {	
 		orderService.saveOrder(order);
 		return order;
 	}
-
 }

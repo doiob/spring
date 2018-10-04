@@ -13,9 +13,15 @@ public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
-
     public int saveOrder(Order order){
-    	return orderRepository.saveOrder(order);
+    	   try {
+    		   return orderRepository.saveOrder(order);
+    		} catch (Exception e) {    			
+    			e.printStackTrace();
+    		}
+    	       return 0;
     }
-            
+    public List<Order> getAllOrders() {		
+		return orderRepository.getAllOrders();
+	}
 }
