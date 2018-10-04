@@ -9,6 +9,8 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,13 +35,15 @@ public class MarketSectorEndpoint {
 	}
 
 	@RequestMapping(path = "/sectors", method = RequestMethod.POST)
-	public ResponseStatus addSector(@RequestBody Sector sector) {
+	public ResponseEntity<ResponseStatus> addSector(@RequestBody Sector sector) {
 		int numRows = service.addMarketSector(sector);
-
+		
 		if (numRows != 1) {
-			return new ResponseStatus(0, "Successfully added new sector");
+			return new ResponseEntity<ResponseStatus>(
+					new ResponseStatus(0, "Successfully added new sector"), HttpStatus.CREATED); 
 		} else {
-			return new ResponseStatus(1111, "Unable to add new sector");
+			return new ResponseEntity<ResponseStatus>(
+					new ResponseStatus(1111, "Unable to add new sector"), HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 	}
 

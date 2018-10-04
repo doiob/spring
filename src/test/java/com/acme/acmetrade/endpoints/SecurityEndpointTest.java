@@ -1,6 +1,7 @@
 package com.acme.acmetrade.endpoints;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +23,11 @@ public class SecurityEndpointTest {
 	public void init() {
 		RestAssured.port = serverPort;
 
+	}
+	
+	@Test
+	public void getAllSecurites() {
+		
 	}
 
 
