@@ -58,7 +58,7 @@ public class SecurityService {
         return 0;
     }
 
-    public int deleteSecurityBySectorId(String sectorId){
+    public int deleteSecurityBySectorId(int sectorId){
         try {
             return securityRepository.deleteSecurityBySectorId(sectorId);
         } catch (Exception e) {
@@ -88,7 +88,7 @@ public class SecurityService {
     }
     public List<Security> getSecuritiesBySectorId(Sector sector) {
     	try {
-			return securityRepository.retrieveSecuritiesBySectorId(sector);
+			return securityRepository.retrieveSecuritiesBySectorId(sector.getId());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
