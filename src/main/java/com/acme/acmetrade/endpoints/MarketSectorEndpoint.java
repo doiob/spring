@@ -5,7 +5,10 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +20,8 @@ import com.acme.acmetrade.services.SectorService;
 
 @RestController
 public class MarketSectorEndpoint {
+	
+	Logger log = LoggerFactory.getLogger(MarketSectorEndpoint.class);
 
 	@Autowired
 	SectorService service;
@@ -38,12 +43,12 @@ public class MarketSectorEndpoint {
 	}
 
 	@RequestMapping(path = "/sectors/{id}", method = RequestMethod.GET)
-	public Sector listSector(@PathParam("id") Integer id) {
-		return new Sector();
+	public Sector listSector(@PathVariable("id") int id) {
+		return service.getMarketSectorById(id);
 	}
 
 	@RequestMapping(path = "/sectors/{id}", method = RequestMethod.DELETE)
-	public ResponseStatus deleteSector(@PathParam("id") int id) {
+	public ResponseStatus deleteSector(@PathVariable("id") int id) {
 		int numRows = service.deleteMarketSector(new Sector(id, StringUtils.EMPTY, StringUtils.EMPTY));
 
 		if (numRows != 1) {

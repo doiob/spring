@@ -27,6 +27,10 @@ public class MarketSectorRepository {
 				sector.getSectorName(), sector.getSectorDesc(), sector.getId());
 	}
 	
+	public Sector getMarketSectorById(int id) {
+		return jdbcTemplate.queryForObject("SELECT * from MARKET_SECTOR WHERE SECTOR_ID = ?", new Object[] {id},  new MarketSectorRowMapper());
+	}
+	
 	public Sector getMarketSectorByName(String name) {
 		return jdbcTemplate.queryForObject("SELECT * from MARKET_SECTOR WHERE SECTOR_NAME = ?", new Object[] {name},  new MarketSectorRowMapper());
 	}
