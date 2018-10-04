@@ -1,11 +1,12 @@
 package com.acme.acmetrade.repository;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 
 import com.acme.acmetrade.TradeApplication;
 import com.acme.acmetrade.domain.Sector;
@@ -58,6 +57,23 @@ public class MarketSectorTest {
 		sector.setSectorDesc("This is a new description");
 		marketSectorRepository.updateMarketSector(sector);
 		Sector updatedSector = marketSectorRepository.getMarketSectorByName("NewSectorName");
-		assertThat(updatedSector, not(equalTo(null)));
+		assertThat(updatedSector.getSectorName(), equalTo("NewSectorName"));
 	}
+	
+	@Test
+	@Transactional
+	public void getSectorByName() {
+		Sector sector = marketSectorRepository.getMarketSectorByName("Health");
+		assertThat(sector, not(equalTo(null)));
+	}
+	
+	@Test
+	@Transactional
+	public void deleteSector() {
+		Sector sector = marketSectorRepository.getMarketSectorByName("Health");
+		int count = marketSectorRepository.deleteMarketSector(sector);
+		assertThat(count, equalTo(1));
+	}
+	
+	
 }
