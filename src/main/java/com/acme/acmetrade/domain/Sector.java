@@ -37,4 +37,18 @@ public class Sector {
 		this.sectorName = sectorName;
 		this.sectorDesc = sectorDesc;
 	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Sector [id=");
+		builder.append(id);
+		builder.append(", sectorName=");
+		builder.append(sectorName);
+		builder.append(", sectorDesc=");
+		builder.append(sectorDesc);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 }

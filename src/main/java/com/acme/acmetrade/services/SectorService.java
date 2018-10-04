@@ -20,10 +20,16 @@ public class SectorService {
     private MarketSectorRepository marketSectorRepository;
 
     public int addMarketSector(Sector sector){
-    	return marketSectorRepository.addMarketSector(sector);
+    	try {
+			return marketSectorRepository.addMarketSector(sector);
+		} catch (DataAccessException e) {
+			log.error("Unable to add new market sector:\t{}", sector, e);
+			return 0;
+		}
     }
     
     public int updateMarketSector(Sector sector) {
+    	
     	return marketSectorRepository.updateMarketSector(sector);
     }
     
@@ -36,8 +42,8 @@ public class SectorService {
     		return marketSectorRepository.getMarketSectorById(id);
     	} catch (DataAccessException e) {
     		log.error("Unable to get market sector by id:\t{}", id, e);
-    	}
-    	return new Sector();    	
+    		return new Sector();
+    	}    	    	
     }
     
     public List<Sector> getAllMarketSectors() {
@@ -45,7 +51,12 @@ public class SectorService {
     }  
     
     public int deleteMarketSector(Sector sector) {
-    	return marketSectorRepository.deleteMarketSector(sector);
+    	try {
+			return marketSectorRepository.deleteMarketSector(sector);
+		} catch (DataAccessException e) {
+			log.error("Unable to add delete market sector:\t{}", sector, e);
+			return 0;
+		}
     } 
     
     
