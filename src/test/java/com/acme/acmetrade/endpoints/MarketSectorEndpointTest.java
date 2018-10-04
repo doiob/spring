@@ -23,6 +23,7 @@ import com.acme.acmetrade.domain.ResponseStatus;
 import com.acme.acmetrade.domain.Sector;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 @RunWith(SpringRunner.class)
@@ -68,7 +69,8 @@ public class MarketSectorEndpointTest {
 		json.put("sectorName", "Test");
 		json.put("sectorDesc", "Test sector");
 		
-		Response response = given().accept(MediaType.APPLICATION_JSON_VALUE)
+		Response response = given().contentType(ContentType.JSON)
+				.auth().basic("bill", "bill")
 				.body(json.toString())
 				.when().post("/sectors")
 				.then().statusCode(HttpStatus.SC_CREATED)
@@ -77,7 +79,16 @@ public class MarketSectorEndpointTest {
 		ResponseStatus status = response.as(ResponseStatus.class);
 		
 		assertThat(status.getStatusCode(), equalTo("0"));
-				
+		
+	}
+	
+	@Test
+	public void deleteSector() {
+		
+	}
+	
+	@Test 
+	public void updateSector() {
 		
 	}
 

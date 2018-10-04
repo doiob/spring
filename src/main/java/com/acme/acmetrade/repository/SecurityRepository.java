@@ -41,7 +41,7 @@ public class SecurityRepository {
 				symbol);
 	}
 
-	public int deleteSecurityBySectorId(String sectorId) {
+	public int deleteSecurityBySectorId(int sectorId) {
 		return jdbcTemplate.update("DELETE SECURITIES WHERE SECTOR_ID = ?",
 				sectorId);
 	}
@@ -50,21 +50,17 @@ public class SecurityRepository {
 		return jdbcTemplate.query("SELECT * from SECURITIES", new SecurityRowMapper());
 	}
 
-	public List<Security> retrieveSecurityBySectorId(String sectorId) {
-		return jdbcTemplate.query("SELECT * from SECURITIES where SECTOR_ID = ?",new SecurityRowMapper(), new Object[] {sectorId});
-	}
-
 	public Security retrieveSecurityBySymbol(String symbol) {
 		return (Security)jdbcTemplate.queryForObject("SELECT * from SECURITIES where SYMBOL = ?",new SecurityRowMapper(), new Object[] {symbol});
 	}
 
-	public List<Security> retrieveSecuritiesBySectorId(Sector sector) {
+	public List<Security> retrieveSecuritiesBySectorId(int sectorId) {
 		return jdbcTemplate.query(new PreparedStatementCreator() {
 
 			@Override
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 				PreparedStatement stmt = con.prepareStatement("SELECT * from SECURITIES where SECTOR_ID = ?");
-				stmt.setInt(1, sector.getId());
+				stmt.setInt(1, sectorId);
 				return stmt;
 			}
 		}, new SecurityRowMapper());
