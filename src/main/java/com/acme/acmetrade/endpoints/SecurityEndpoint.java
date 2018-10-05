@@ -7,6 +7,7 @@ import com.acme.acmetrade.services.SecurityService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -46,8 +47,10 @@ public class SecurityEndpoint {
 	}
 
 	@RequestMapping(path = "/securities/{symbol}" , method = RequestMethod.DELETE)
-	public void deleteSecurityBySymbol(@PathVariable("symbol") String symbol) {
+	public ResponseEntity<ResponseStatus> deleteSecurityBySymbol(@PathVariable("symbol") String symbol) {
 		securityService.deleteSecurityBySymbol(symbol);
+		return new ResponseEntity<ResponseStatus>(
+				new ResponseStatus(200, "Successfully deleted sector"), HttpStatus.OK); 
 	}
 
 //	@RequestMapping(path = "/securities/{sectorId}" , method = RequestMethod.DELETE)

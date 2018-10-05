@@ -9,9 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.acme.acmetrade.domain.Order;
 import com.acme.acmetrade.domain.OrderTrans;
-import com.acme.acmetrade.repository.OrderRepository.OrderRowMapper;
 
 @Repository
 public class OrderTransRepository {	         
