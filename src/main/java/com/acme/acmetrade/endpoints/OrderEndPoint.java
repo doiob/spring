@@ -30,7 +30,6 @@ public class OrderEndPoint {
 	@RequestMapping(path = "/orders" , method = RequestMethod.POST)
 	public String addOrder(@Valid @RequestBody Order order) {
 		str= orderService.saveOrder(order);
-		//return order;
 		return str;
 	}
 }

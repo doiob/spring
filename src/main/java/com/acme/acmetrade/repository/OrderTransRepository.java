@@ -25,8 +25,8 @@ public class OrderTransRepository {
 		
 	public int saveOrderTrans(OrderTrans orderTrans) {	
 		return jdbcTemplate.update(
-				"INSERT INTO ORDERTRANS(TRANS_ID, TRANS_ORDER_ID, TRANS_CREATION_DATE, TRANS_ORDER_STATUS, TRANS_LAST_UPDATE) VALUES(?,?,?,?,?)",
-				null, orderTrans.getTransOrderId(), orderTrans.getTransCreationDate(), orderTrans.getTransOrderStatus(), orderTrans.getTransLastUpdate());
+				"INSERT INTO ORDERTRANS(TRANS_ORDER_ID, TRANS_CREATION_DATE, TRANS_ORDER_STATUS, TRANS_LAST_UPDATE) VALUES(?,?,?,?)",
+				 orderTrans.getTransOrderId(), orderTrans.getTransCreationDate(), orderTrans.getTransOrderStatus(), orderTrans.getTransLastUpdate());
 	}	
 		
 	class OrderTransRowMapper implements RowMapper<OrderTrans> {

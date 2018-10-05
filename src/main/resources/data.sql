@@ -7,3 +7,4 @@ Insert into ORDERS Values(1, null, 'GOOGL','BUY', 'Limit',  500, 100, '2018-10-0
 Insert into ORDERS Values(1, null, 'AAPL','BUY', 'Limit',  3000, 100, '2018-10-03 13:50:52.69');
 Insert into ORDERTRANS Values(null, 1, '2018-10-04 13:50:52.69','Pending', '2018-10-04 14:50:52.69');
 Insert into ORDERTRANS Values(null, 1, '2018-10-04 13:50:52.69','Completed', '2018-10-04 14:50:52.69');
+Insert into ORDERTRANS Values(null, 2, '2018-10-05 13:50:52.69','Completed', '2018-10-05 14:50:52.69');

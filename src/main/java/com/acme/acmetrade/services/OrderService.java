@@ -31,15 +31,17 @@ public class OrderService {
     @Transactional  
     public String saveOrder(Order order){		
     	saveOrderMast(order);
+    	String currOrderIds = orderRepository.getlatestOrder();
+    	int currOrderId = Integer.parseInt(currOrderIds);
+    	order.setOrderId(currOrderId);
     	saveOrderTrans(order);    	
     	return str;
    }
     @Transactional
     public int saveOrderMast(Order order){
-    	   try {  
+    	   try {      		  
     		   order.setLastUpdate(timeStamp);
-    		   order.setOrderId(4);
-    		   return orderRepository.saveOrder(order);
+    		   	return orderRepository.saveOrder(order);
     		}  catch (Exception e) {    			
     			e.printStackTrace();    			
     		}  
@@ -53,9 +55,8 @@ public class OrderService {
     		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     		Calendar cal = Calendar.getInstance();
     		String timeStamp = dateFormat.format(cal.getTime());
-    		
+    	
     		OrderTrans orderTrans = new OrderTrans();		
-	 		orderTrans.setTransId(10);
 	 		orderTrans.setTransOrderId(order.getOrderId());	
 	 		orderTrans.setTransCreationDate(timeStamp);
 	 		orderTrans.setTransOrderStatus("Completed");

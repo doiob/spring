@@ -21,14 +21,20 @@ public class OrderRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public List<Order> getAllOrders() {
-		return jdbcTemplate.query("SELECT * from ORDERS", new OrderRowMapper());
+	public String getlatestOrder() {
+		return jdbcTemplate.queryForObject("SELECT order_id FROM ORDERS order by order_id desc limit 1", new OrderIdMapper());
+		
 	}	
 	
+	public List<Order> getAllOrders() {
+		return jdbcTemplate.query("SELECT * from ORDERS", new OrderRowMapper());
+	}
+	
 	public int saveOrder(Order order) {
+		
 		return jdbcTemplate.update(
-				"INSERT INTO ORDERS(TRADER_ID, ORDER_ID, SYMBOL, SIDE, ORDER_TYPE, PRICE, SHARES, LAST_UPDATE) VALUES(?,?,?,?,?,?,?,?)",
-				order.getTraderId(), order.getOrderId(), order.getSymbol(), order.getSide(), order.getOrderType(), order.getPrice(), order.getShares(), order.getLastUpdate());
+				"INSERT INTO ORDERS(TRADER_ID, SYMBOL, SIDE, ORDER_TYPE, PRICE, SHARES, LAST_UPDATE) VALUES(?,?,?,?,?,?,?)",
+				order.getTraderId(), order.getSymbol(), order.getSide(), order.getOrderType(), order.getPrice(), order.getShares(), order.getLastUpdate());
 	}
 		
 	
@@ -48,4 +54,16 @@ public class OrderRepository {
 			return order;
 		}
 	}
+	
+	class OrderIdMapper implements RowMapper<String> {
+
+		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+			String orderId;
+			orderId = rs.getString("ORDER_ID");	
+							
+			return orderId;
+		}
+	}
+	
+	
 }
