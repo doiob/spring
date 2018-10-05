@@ -3,16 +3,21 @@ package com.acme.acmetrade.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Sector {
 	
 	@JsonProperty(defaultValue="0")
+	@ApiModelProperty(value="Representation of the sector id, as generated from the database")
 	private int id;
 	
 	@JsonProperty()
+	@ApiModelProperty(value="The name of the market sector, must be a unique name in the database")
 	private String sectorName;
 	
 	@JsonProperty
+	@ApiModelProperty(value="A description of the market sector")
 	private String sectorDesc;
 	
 	public int getId() {
