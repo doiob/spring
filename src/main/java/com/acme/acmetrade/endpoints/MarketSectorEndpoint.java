@@ -54,15 +54,9 @@ public class MarketSectorEndpoint {
 	public ResponseEntity<List<ResponseStatus>> addSector(@Valid @RequestBody Sector sector, BindingResult result) {        
         
 		if (result.hasErrors()) {
-			List<ResponseStatus> list = result.getFieldErrors().stream().map(x -> {
-				return new ResponseStatus(x.getCode(), x.getDefaultMessage());				
-			}).collect(Collectors.toList());
-			
-//			List<ResponseStatus> list = new ArrayList<>();
-//			for (FieldError fe: result.getFieldErrors()) {
-//				list.add(new ResponseStatus(fe.getCode(), fe.getDefaultMessage()));
-//			}
-			
+			List<ResponseStatus> list = result.getFieldErrors().stream().map(fieldError -> {
+				return new ResponseStatus(fieldError.getCode(), fieldError.getDefaultMessage());				
+			}).collect(Collectors.toList());			
 			return new ResponseEntity<List<ResponseStatus>>(list, HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		
