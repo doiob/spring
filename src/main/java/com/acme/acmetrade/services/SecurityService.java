@@ -29,25 +29,18 @@ public class SecurityService {
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+           throw e;
 	}
-       return 0;
+
     }
 
-    public int saveSecurity(Security security){
-        try {
-			return securityRepository.saveSecurity(security);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        return 0;
-    }
     public int updateSecurity(Security security){
         try {
             int count = securityRepository.updateSecurity(security);
             if (count == 0){
                 throw new SecurityNotFoundException("Security -"+security.getSymbol()+" Not Found");
-            }
+            } return count;
+
 		}
         catch (SecurityNotFoundException e){
             throw e;
@@ -55,8 +48,9 @@ public class SecurityService {
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+            throw e;
 		}
-        return 0;
+
     }
     public int deleteSecurityBySymbol(String symbol){
         try {
@@ -72,8 +66,9 @@ public class SecurityService {
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+            throw e;
 		}
-        return 0;
+
     }
 
     public int deleteSecurityBySectorId(int sectorId){
@@ -82,18 +77,23 @@ public class SecurityService {
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            throw e;
         }
-        return 0;
+
     }
-    public List<Security> getAllSecurities() 
+    public List<Security> getAllSecurities(String symbol)
     {
     	try {
-			return securityRepository.retrieveAllSecurities();
+    	    if (symbol == null)
+			    return securityRepository.retrieveAllSecurities();
+    	    else
+    	        return securityRepository.searchAllSecurities(symbol.toUpperCase());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+            throw e;
 		}
-        return Collections.emptyList();
+
     }
     public Security getSecurityBySymbol(String symbol) {
         Security sec = null;
@@ -106,6 +106,7 @@ public class SecurityService {
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		}
 		return sec;
     }
@@ -115,8 +116,9 @@ public class SecurityService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+            throw e;
 		}
-        return Collections.emptyList();
+
 
     }
 }

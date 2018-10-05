@@ -1,12 +1,16 @@
 package com.acme.acmetrade.endpoints;
 
 
+import com.acme.acmetrade.domain.ResponseStatus;
 import com.acme.acmetrade.domain.Security;
 import com.acme.acmetrade.services.SecurityService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +23,8 @@ public class SecurityEndpoint {
 	private SecurityService securityService ;
 
 	@RequestMapping(path = "/securities" , method = RequestMethod.GET)
-	public List<Security> listSecurities() {
-		return  securityService.getAllSecurities();
+	public List<Security> listSecurities(@RequestParam(required = false) String startsWith) {
+		return  securityService.getAllSecurities(startsWith);
 	}
 
 	@RequestMapping(path = "/securities/{symbol}" , method = RequestMethod.GET)
@@ -30,7 +34,7 @@ public class SecurityEndpoint {
 	}
 
 	@RequestMapping(path = "/securities" , method = RequestMethod.POST)
-	public Security addSecurity(@RequestBody Security security) {
+	public Security addSecurity(@Valid @RequestBody Security security) {
 		securityService.addSecurity(security);
 		return security;
 	}
@@ -43,8 +47,10 @@ public class SecurityEndpoint {
 	}
 
 	@RequestMapping(path = "/securities/{symbol}" , method = RequestMethod.DELETE)
-	public void deleteSecurityBySymbol(@PathVariable("symbol") String symbol) {
+	public ResponseEntity<ResponseStatus> deleteSecurityBySymbol(@PathVariable("symbol") String symbol) {
 		securityService.deleteSecurityBySymbol(symbol);
+		return new ResponseEntity<ResponseStatus>(
+				new ResponseStatus("200", "Successfully deleted sector"), HttpStatus.OK); 
 	}
 
 //	@RequestMapping(path = "/securities/{sectorId}" , method = RequestMethod.DELETE)
