@@ -1,6 +1,5 @@
 package com.acme.acmetrade.repository;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,10 +13,10 @@ import com.acme.acmetrade.domain.Order;
 
 @Repository
 public class OrderRepository {
-
-	private final JdbcTemplate jdbcTemplate;
-
+	
 	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
 	public OrderRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
