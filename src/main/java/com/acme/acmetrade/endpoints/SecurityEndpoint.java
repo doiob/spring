@@ -50,7 +50,7 @@ public class SecurityEndpoint {
 	public ResponseEntity<ResponseStatus> deleteSecurityBySymbol(@PathVariable("symbol") String symbol) {
 		securityService.deleteSecurityBySymbol(symbol);
 		return new ResponseEntity<ResponseStatus>(
-				new ResponseStatus(200, "Successfully deleted sector"), HttpStatus.OK); 
+				new ResponseStatus("200", "Successfully deleted sector"), HttpStatus.OK); 
 	}
 
 //	@RequestMapping(path = "/securities/{sectorId}" , method = RequestMethod.DELETE)
