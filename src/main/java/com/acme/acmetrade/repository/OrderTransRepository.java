@@ -30,7 +30,6 @@ public class OrderTransRepository {
 	}	
 		
 	class OrderTransRowMapper implements RowMapper<OrderTrans> {
-
 		@Override
 		public OrderTrans mapRow(ResultSet rs, int rowNum) throws SQLException {
 			OrderTrans orderTrans = new OrderTrans();			
