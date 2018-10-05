@@ -2,8 +2,6 @@ package com.acme.acmetrade.endpoints;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
@@ -37,7 +35,6 @@ public class MarketSectorEndpoint {
 	@RequestMapping(path = "/sectors", method = RequestMethod.POST)
 	public ResponseEntity<ResponseStatus> addSector(@RequestBody Sector sector) {
 		
-		log.info("Sector:\t{}", sector);
 		int numRows = service.addMarketSector(sector);
 		
 		if (numRows == 1) {
@@ -61,6 +58,8 @@ public class MarketSectorEndpoint {
 	@RequestMapping(path = "/sectors/{id}", method = RequestMethod.DELETE)
 	public ResponseStatus deleteSector(@PathVariable("id") int id) {
 		int numRows = service.deleteMarketSector(new Sector(id, StringUtils.EMPTY, StringUtils.EMPTY));
+		
+		log.info("Number of rows deleted:\t{}", numRows);
 
 		if (numRows == 1) {
 			return new ResponseStatus(0, "Successfully deleted sector");
@@ -70,7 +69,7 @@ public class MarketSectorEndpoint {
 	}
 
 	@RequestMapping(path = "/sectors", method = RequestMethod.PATCH)
-	public ResponseStatus updateMarketSector(Sector sector) {
+	public ResponseStatus updateMarketSector(@RequestBody Sector sector) {
 		int numRows = service.updateMarketSector(sector);
 
 		if (numRows == 1) {
