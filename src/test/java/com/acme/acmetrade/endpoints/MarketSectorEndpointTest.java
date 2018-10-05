@@ -5,6 +5,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
+import java.util.List;
+
 import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,9 +92,9 @@ public class MarketSectorEndpointTest {
 				.when().post("/sectors")
 				.then().statusCode(HttpStatus.SC_CREATED)
 				.and().extract().response();
-		ResponseStatus status = response.as(ResponseStatus.class);
+		ResponseStatus[] status = response.as(ResponseStatus[].class);
 		
-		assertThat(status.getStatusCode(), equalTo(0));
+		assertThat(status[0].getStatusCode(), equalTo("0"));
 		
 	}
 	
@@ -127,7 +129,7 @@ public class MarketSectorEndpointTest {
 				.and().extract().response();
 		ResponseStatus status = response.as(ResponseStatus.class);
 		
-		assertThat(status.getStatusCode(), equalTo(0));
+		assertThat(status.getStatusCode(), equalTo("0"));
 		
 	}
 	
@@ -147,7 +149,7 @@ public class MarketSectorEndpointTest {
 				.and().extract().response();
 		ResponseStatus status = response.as(ResponseStatus.class);
 		
-		assertThat(status.getStatusCode(), equalTo(0));
+		assertThat(status.getStatusCode(), equalTo("0"));
 	}
 
 }
