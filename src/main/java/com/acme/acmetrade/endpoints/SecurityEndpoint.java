@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/trading")
 public class SecurityEndpoint {
 
 	//

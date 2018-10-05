@@ -36,9 +36,11 @@ public class MarketSectorEndpoint {
 
 	@RequestMapping(path = "/sectors", method = RequestMethod.POST)
 	public ResponseEntity<ResponseStatus> addSector(@RequestBody Sector sector) {
+		
+		log.info("Sector:\t{}", sector);
 		int numRows = service.addMarketSector(sector);
 		
-		if (numRows != 1) {
+		if (numRows == 1) {
 			return new ResponseEntity<ResponseStatus>(
 					new ResponseStatus(0, "Successfully added new sector"), HttpStatus.CREATED); 
 		} else {
@@ -60,7 +62,7 @@ public class MarketSectorEndpoint {
 	public ResponseStatus deleteSector(@PathVariable("id") int id) {
 		int numRows = service.deleteMarketSector(new Sector(id, StringUtils.EMPTY, StringUtils.EMPTY));
 
-		if (numRows != 1) {
+		if (numRows == 1) {
 			return new ResponseStatus(0, "Successfully deleted sector");
 		} else {
 			return new ResponseStatus(1111, "Unable to delete sector");
@@ -71,7 +73,7 @@ public class MarketSectorEndpoint {
 	public ResponseStatus updateMarketSector(Sector sector) {
 		int numRows = service.updateMarketSector(sector);
 
-		if (numRows != 1) {
+		if (numRows == 1) {
 			return new ResponseStatus(0, "Successfully updated sector");
 		} else {
 			return new ResponseStatus(1111, "Unable to updated sector");
