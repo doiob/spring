@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.acme.acmetrade.domain.Order;
 import com.acme.acmetrade.domain.OrderTrans;
+import com.acme.acmetrade.repository.OrderRepository.OrderRowMapper;
 
 @Repository
 public class OrderTransRepository {	         
@@ -21,7 +22,7 @@ public class OrderTransRepository {
 	public List<OrderTrans> getAllOrderTrans() {
 		return jdbcTemplate.query("SELECT * from ORDERTRANS", new OrderTransRowMapper());
 	}	
-	
+		
 	public int saveOrderTrans(OrderTrans orderTrans) {	
 		return jdbcTemplate.update(
 				"INSERT INTO ORDERTRANS(TRANS_ID, TRANS_ORDER_ID, TRANS_CREATION_DATE, TRANS_ORDER_STATUS, TRANS_LAST_UPDATE) VALUES(?,?,?,?,?)",
@@ -33,11 +34,11 @@ public class OrderTransRepository {
 		@Override
 		public OrderTrans mapRow(ResultSet rs, int rowNum) throws SQLException {
 			OrderTrans orderTrans = new OrderTrans();			
-			orderTrans.setTransId(rs.getInt("TRADER_ID"));
-			orderTrans.setTransOrderId(rs.getInt("ORDER_ID"));	
-			orderTrans.setTransCreationDate(rs.getString("SYMBOL"));
-			orderTrans.setTransOrderStatus(rs.getString("SIDE"));
-			orderTrans.setTransLastUpdate(rs.getString("ORDER_TYPE"));							
+			orderTrans.setTransId(rs.getInt("TRANS_ID"));
+			orderTrans.setTransOrderId(rs.getInt("TRANS_ORDER_ID"));	
+			orderTrans.setTransCreationDate(rs.getString("TRANS_CREATION_DATE"));
+			orderTrans.setTransOrderStatus(rs.getString("TRANS_ORDER_STATUS"));
+			orderTrans.setTransLastUpdate(rs.getString("TRANS_LAST_UPDATE"));							
 			return orderTrans;
 		}
 	}

@@ -22,6 +22,11 @@ public class OrderService {
     private OrderTransRepository orderTransRepository;  
     
     public static final String str = "Order Saved";
+    
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	Calendar cal = Calendar.getInstance();
+	String timeStamp = dateFormat.format(cal.getTime());
+	
       
     @Transactional  
     public String saveOrder(Order order){		
@@ -31,12 +36,15 @@ public class OrderService {
    }
     @Transactional
     public int saveOrderMast(Order order){
-    	   try {    	 		
+    	   try {  
+    		   order.setLastUpdate(timeStamp);
+    		   order.setOrderId(4);
     		   return orderRepository.saveOrder(order);
     		}  catch (Exception e) {    			
     			e.printStackTrace();    			
     		}  
     	   return 0;
+    	   
     }
     @Transactional
     public int saveOrderTrans(Order order){ 	    	
